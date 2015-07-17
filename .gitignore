@@ -28,3 +28,6 @@ build/Release
 
 ##/nbproject/private/
 /nbproject
+
+## sqlite
+*.sqlite
