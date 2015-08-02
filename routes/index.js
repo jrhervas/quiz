@@ -6,7 +6,7 @@ var staticsController = require ('../controllers/statics_controller');
 
 /* GET home page. */
 router.get('/', function(req, res) {
-  res.render('index', { title: 'QUIZ' });
+  res.render('index', { title: 'QUIZ', errors: []});
 });
 
 // Pagina estatica del autor
