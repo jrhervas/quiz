@@ -11,7 +11,7 @@ exports.load = function (req, res, next, quizId){
             else{
                 next(new Error('No existe quizId=' + quizId));
             }
-        }    
+        }
     ).catch(function(error) {next(error);});
 };
 
@@ -47,7 +47,7 @@ exports.new = function (req, res){
 // POST /quizes/create
 exports.create = function(req, res){
     var quiz = models.Quiz.build(req.body.quiz);
-    
+
     quiz.validate().then(
     function(err){
         if (err){
@@ -64,7 +64,7 @@ exports.create = function(req, res){
 // GET /quizes/:id/edit
 exports.edit = function(req, res){
     var quiz = req.quiz; //autoload de instancia quiz
-    
+
     res.render('quizes/edit', {quiz: quiz,errors: []});
 };
 
@@ -72,7 +72,7 @@ exports.edit = function(req, res){
 exports.update = function(req, res){
     req.quiz.pregunta  = req.body.quiz.pregunta;
     req.quiz.respuesta = req.body.quiz.respuesta;
-    
+
     req.quiz
     .validate()
     .then(
@@ -87,4 +87,11 @@ exports.update = function(req, res){
             }
         }
     );
+};
+
+// DELETE /quizes/:id
+exports.destroy = function (req, res){
+  req.quiz.destroy().then( function(){
+    res.redirect('/quizes');
+  }).catch(function(error){next(error)});
 };
