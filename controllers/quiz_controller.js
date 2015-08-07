@@ -17,9 +17,14 @@ exports.load = function (req, res, next, quizId){
 
 // GET /quizes
 exports.index = function(req, res){
-    models.Quiz.findAll().then(function(quizes){
+    var options = {};
+    if (req.query.search){
+      options.where = {pregunta: {like: '%'+req.query.search+'%'}};
+    }
+    models.Quiz.findAll(options).then(function(quizes){
         res.render('quizes/index',{quizes: quizes, errors: []});
-    })
+        //console.log('\n** REQ **\n' + require('util').inspect(req, { depth: null }) + '\n** /REQ **\n');
+    });
 };
 
 // GET /quizes/:id

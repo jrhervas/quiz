@@ -1,3 +1,17 @@
 <h1><%= message %></h1>
 <h2><%= error.status %></h2>
 <pre><%= error.stack %></pre>
+
+<% if (request) { %>
+<div style="color:blue">
+  <strong>REQUEST</strong>
+  <%= request %>
+</div>
+<% } %>
+
+<% if (response) { %>
+<div style="color:green">
+  <strong>RESPONSE</strong>
+  <%= response %>
+</div>
+<% } %>
