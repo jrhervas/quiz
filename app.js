@@ -39,6 +39,22 @@ app.use(function(req, res, next){
   next();
 });
 
+app.use(function(req, res, next){
+  var maxTime = 2 * 60 * 1000;   // En Milisegundos
+
+  if (req.session.user){
+    if ((new Date().getTime() - req.session.user.lastaccess) > maxTime){
+      console.log('\n\nSesion Expirada !!! => ' + require('util').inspect(req.session.user, { depth: null })+ '\n\n');
+      delete req.session.user;
+      res.redirect('/');
+    }
+    else{
+      req.session.user.lastaccess = new Date().getTime();
+    }
+  }
+  next();
+});
+
 app.use('/', routes);
 
 // catch 404 and forward to error handler

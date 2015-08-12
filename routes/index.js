@@ -11,9 +11,6 @@ router.get('/', function(req, res) {
   res.render('index', { title: 'QUIZ', errors: []});
 });
 
-// Pagina estatica del autor
-router.get('/author', staticsController.author);
-
 // Autoload de comandos con :quizId
 router.param('quizId', quizController.load);      // autoload :quizId
 router.param('commentId', commentController.load);// autoload :commentId
@@ -37,5 +34,9 @@ router.delete('/quizes/:quizId(\\d+)',sessionController.loginRequired, quizContr
 router.get('/quizes/:quizId(\\d+)/comments/new', commentController.new);
 router.post('/quizes/:quizId(\\d+)/comments', commentController.create);
 router.get('/quizes/:quizId(\\d+)/comments/:commentId(\\d+)/publish', sessionController.loginRequired, commentController.publish);
+
+
+// Pagina estatica del autor
+router.get('/author', staticsController.author);
 
 module.exports = router;
